@@ -9,10 +9,12 @@
 <body>
 
 <nav th:fragment="header">
+    <!--/*@thymesVar id="title" type="title"*/-->
     <h1 th:text="${title}">Coding Events</h1>
     <ul class="nav">
-        <li class="nav-item"><a href="/events">All Events</a></li>
-        <li class="nav-item"><a href="/events/create">Create Event</a></li>
+        <li class="nav-link"><a href="/events">All Events </a></li>
+        <li class="nav-link"><a href="/events/create">Create Event </a></li>
+        <li class="nav-link"><a href="/events/delete">Delete Events </a></li>
     </ul>
 </nav>
 
