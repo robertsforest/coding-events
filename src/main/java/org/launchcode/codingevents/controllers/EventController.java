@@ -4,10 +4,7 @@ import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,6 +50,22 @@ public class EventController {
                 EventData.remove(id);
             }
         }
+        return "redirect:";
+    }
+
+    @GetMapping("edit/{eventId}")
+    public String displayEditForm(Model model, @PathVariable int eventId) {
+        Event event = EventData.getById(eventId);
+        model.addAttribute("event",event);
+        model.addAttribute("title","Edit Event " + event.getName() + " (id=" + event.getId() + ")");
+        return "events/edit";
+    }
+
+    @PostMapping("edit")
+    public String processEditForm(int eventId, String eventName, String eventDescription){
+        Event event = EventData.getById(eventId);
+        event.setName(eventName);
+        event.setDescription(eventDescription);
         return "redirect:";
     }
 }
