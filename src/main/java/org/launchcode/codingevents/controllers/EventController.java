@@ -26,6 +26,7 @@ public class EventController {
         return "events/index";
     }
 
+
     @GetMapping("create")
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create New Event");
@@ -70,10 +71,11 @@ public class EventController {
     }
 
     @PostMapping("edit")
-    public String processEditForm(int eventId, String name, String description){
+    public String processEditForm(int eventId, String name, String description, String contactEmail){
         Event event = EventData.getById(eventId);
         event.setName(name);
         event.setDescription(description);
+        event.setContactEmail(contactEmail);
         return "redirect:";
     }
 }
