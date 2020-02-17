@@ -71,11 +71,13 @@ public class EventController {
     }
 
     @PostMapping("edit")
-    public String processEditForm(int eventId, String name, String description, String contactEmail){
+    public String processEditForm(int eventId, String name, String description, String contactEmail, String location, int numAttendees){
         Event event = EventData.getById(eventId);
         event.setName(name);
         event.setDescription(description);
         event.setContactEmail(contactEmail);
+        event.setLocation(location);
+        event.setNumAttendees(numAttendees);
         return "redirect:";
     }
 }

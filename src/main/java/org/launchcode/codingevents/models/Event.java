@@ -1,8 +1,8 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.SafeHtml;
+
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class Event {
@@ -20,16 +20,24 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
+    @NotBlank
+    private String location;
+
+    @Min(value=1, message="The minimum number of attendees is 1.")
+    private int numAttendees;
+
     public Event(){
         this.id = nextId;
         nextId++;
     }
 
-    public Event(String name, String description, String contactEmail) {
+    public Event(String name, String description, String contactEmail, String location, int numAttendees) {
         this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.location = location;
+        this.numAttendees = numAttendees;
     }
 
     public String getName() {
@@ -54,6 +62,22 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getNumAttendees() {
+        return numAttendees;
+    }
+
+    public void setNumAttendees(int numAttendees) {
+        this.numAttendees = numAttendees;
     }
 
     public int getId() {
