@@ -2,6 +2,7 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.EventType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -31,6 +32,7 @@ public class EventController {
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create New Event");
         model.addAttribute(new Event());
+        model.addAttribute("types", EventType.values());
         return "events/create";
     }
 
@@ -71,13 +73,11 @@ public class EventController {
     }
 
     @PostMapping("edit")
-    public String processEditForm(int eventId, String name, String description, String contactEmail, String location, int numAttendees){
+    public String processEditForm(int eventId, String name, String description, String contactEmail){
         Event event = EventData.getById(eventId);
         event.setName(name);
         event.setDescription(description);
         event.setContactEmail(contactEmail);
-        event.setLocation(location);
-        event.setNumAttendees(numAttendees);
         return "redirect:";
     }
 }

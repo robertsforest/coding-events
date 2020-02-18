@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Event {
     private int id;
     private static int nextId = 1;
+    private EventType type;
 
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters.")
     @NotBlank (message = "Name is required.")
@@ -31,13 +32,14 @@ public class Event {
         nextId++;
     }
 
-    public Event(String name, String description, String contactEmail, String location, int numAttendees) {
+    public Event(String name, String description, String contactEmail, String location, int numAttendees, EventType type) {
         this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.location = location;
         this.numAttendees = numAttendees;
+        this.type = type;
     }
 
     public String getName() {
@@ -82,6 +84,14 @@ public class Event {
 
     public int getId() {
         return id;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     @Override
