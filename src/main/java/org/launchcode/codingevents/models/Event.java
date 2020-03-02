@@ -2,12 +2,18 @@ package org.launchcode.codingevents.models;
 
 import org.hibernate.validator.constraints.SafeHtml;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.util.Objects;
 
+@Entity
 public class Event {
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
+
     private EventType type;
 
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters.")
@@ -27,10 +33,7 @@ public class Event {
     @Min(value=1, message="The minimum number of attendees is 1.")
     private int numAttendees;
 
-    public Event(){
-        this.id = nextId;
-        nextId++;
-    }
+    public Event(){}
 
     public Event(String name, String description, String contactEmail, String location, int numAttendees, EventType type) {
         this();
